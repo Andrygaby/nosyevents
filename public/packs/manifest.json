@@ -1,0 +1,44 @@
+{
+  "application.js": "/packs/js/application-9afcbb5693aa87623e69.js",
+  "application.js.map": "/packs/js/application-9afcbb5693aa87623e69.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/js/application-9afcbb5693aa87623e69.js"
+      ],
+      "js.map": [
+        "/packs/js/application-9afcbb5693aa87623e69.js.map"
+      ]
+    },
+    "home": {
+      "js": [
+        "/packs/js/home-171bc54712748e806ee0.js"
+      ],
+      "js.map": [
+        "/packs/js/home-171bc54712748e806ee0.js.map"
+      ]
+    },
+    "modernizr": {
+      "js": [
+        "/packs/js/modernizr-4a0cbf7cc629065a853a.js"
+      ],
+      "js.map": [
+        "/packs/js/modernizr-4a0cbf7cc629065a853a.js.map"
+      ]
+    },
+    "users": {
+      "js": [
+        "/packs/js/users-0cebc551cf690d1c97dc.js"
+      ],
+      "js.map": [
+        "/packs/js/users-0cebc551cf690d1c97dc.js.map"
+      ]
+    }
+  },
+  "home.js": "/packs/js/home-171bc54712748e806ee0.js",
+  "home.js.map": "/packs/js/home-171bc54712748e806ee0.js.map",
+  "modernizr.js": "/packs/js/modernizr-4a0cbf7cc629065a853a.js",
+  "modernizr.js.map": "/packs/js/modernizr-4a0cbf7cc629065a853a.js.map",
+  "users.js": "/packs/js/users-0cebc551cf690d1c97dc.js",
+  "users.js.map": "/packs/js/users-0cebc551cf690d1c97dc.js.map"
+}

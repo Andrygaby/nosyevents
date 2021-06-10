@@ -1,0 +1,69 @@
+<div class="main">
+    <div class="container">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure>
+                    <img src="images/login.png" alt="sing up image">
+                </figure>
+                <%= link_to "Créer un compte", new_registration_path(resource_name), class: "signup-image-link" %><br>
+                <%= link_to "Mots de passe oublier", new_password_path(resource_name), class: "signup-image-link" %><br>
+                <%= link_to "j'ai pas reçu le mail d'activation", new_confirmation_path(resource_name), class: "signup-image-link" %><br>
+                <%= link_to "Revenir à la page d'acceil", root_path, class: "signup-image-link" %>
+            </div>
+
+            <div class="signin-form">
+                <h2 class="form-title">Connection</h2>
+                <%= form_for(resource, as: resource_name, class: "register-form", url: session_path(resource_name)) do |f| %>
+                    <div class="form-group">
+                        <label for="user_email">
+                            <i class="zmdi zmdi-account material-icons-name"></i>
+                        </label>
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Address email" %>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_password">
+                            <i class="zmdi zmdi-lock"></i>
+                        </label>
+                        <%= f.password_field :password, autocomplete: "current-password", placeholder: "Mot de passe" %>
+                    </div>
+
+                    <div class="form-group">
+                        <% if devise_mapping.rememberable? %>
+                            <%= f.check_box :remember_me, class: "agree-term" %>
+                            <label for="user_remember_me" class="label-agree-term"><span><span></span></span>Se souvenir de moi</label>
+                        <% end %>
+                    </div>
+
+                    <div class="form-group form-button">
+                        <%= f.submit "se connecter", class: "form-submit" %>
+                    </div>
+                </form>
+
+                <div class="social-login">
+                    <span class="social-label">Ou se connecter avec</span>
+                    <ul class="socials">
+                        <li>
+                            <a href="https://colorlib.com/etc/regform/colorlib-regform-7/#">
+                                <i class="display-flex-center zmdi zmdi-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://colorlib.com/etc/regform/colorlib-regform-7/#">
+                                <i class="display-flex-center zmdi zmdi-google"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <% end %>    
+            </div>
+        </div>
+    </div>  
+</div>
+<script type="text/javascript">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-23581568-13');
+</script>

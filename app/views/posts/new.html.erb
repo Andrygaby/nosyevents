@@ -1,0 +1,77 @@
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+					<%= form_for @post, url: posts_path, class: "login100-form validate-form"  do |f| %>
+					<span class="login100-form-title p-b-55">
+						Créer une nouvelle evenement
+					</span>
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Titre obligatoire">
+						<label for="post_titre">Titre</label>
+						<%= f.text_field :title, autofocus: true, class: "input100", placeholder: "Exemple: salon de l'auto"%>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-16">
+						<label>Ville de l'evenement</label>
+						<%= select("post", "city_id", City.all.collect {|p| [p.ville, p.id] }) %>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Lieu obligatoire">
+						<label for="post_lieu">Lieu</label>
+						<%= f.text_field :address, autofocus: true, class: "input100", placeholder: "Exemple: mahamasina"%>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Date de l'evenement obligatoire">
+						<label for="post_date">Date de l'evenement</label>
+			    		<%= f.date_field :date_limite, autofocus: true, class: "input100"%>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-16">
+						<label for="post_heure">Heure</label>
+					    <%= f.time_field :hour, autofocus: true, class: "input100"%>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Description obligatoire">
+						<label for="post_description">Description</label>
+					    <%= f.text_area :description, autofocus: true, class: "input100", style: "height: 150px", placeholder: "resumer de l'emplois du temps pendant l'evenement"%>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-16" style="white-space: pre;">
+						<label>Type d'evenement</label><br>
+<%= check_box("list", "sport", {}, "yes", "no")  %> sport             <%= check_box("list", "spectacle", {}, "yes", "no")  %> spectacle    <%= check_box("list", "concert", {}, "yes", "no")  %> concert     
+<%= check_box("list", "cabaret", {}, "yes", "no")  %> cabaret       <%= check_box("list", "soiree", {}, "yes", "no")  %> soiree            <%= check_box("list", "diner dansant", {}, "yes", "no")  %> diner dansant
+<%= check_box("list", "balle", {}, "yes", "no")  %> balle              <%= check_box("list", "scolaire", {}, "yes", "no")  %> scolaire        <%= check_box("list", "course", {}, "yes", "no")  %> course          
+<%= check_box("list", "festival", {}, "yes", "no")  %> festival         <%= check_box("list", "foire", {}, "yes", "no")  %> foire               <%= check_box("list", "conference", {}, "yes", "no")  %> conference
+<%= check_box("list", "salon", {}, "yes", "no")  %> salon             <%= check_box("list", "teatre", {}, "yes", "no")  %> teatre           <%= check_box("list", "evangelique", {}, "yes", "no")  %> evangelique
+  					</div>
+
+  					  <%= f.hidden_field :user_id, value: current_user.id %>
+
+					<div class="wrap-input100 validate-input m-b-16">
+						<label>prix d'entrer en ariary</label>
+					    <%= f.number_field :price, autofocus: true, min: 100, max: 90000000, step: 100, class: "input100", placeholder: "ignorer si entrer libre"%>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Image obligatoire">
+						<label>Image pour la publicité</label>
+						<%= f.file_field :image, as: :file %>
+					</div>
+					
+					<div class="container-login100-form-btn p-t-25">
+						 <%= f.submit "Créer", class: "login100-form-btn" %>
+					</div>
+
+
+					<div class="text-center w-full p-t-115">
+						<span class="txt1">
+							Revenir à la page 
+						</span>
+
+						<a class="txt1 bo1 hov1" href="<%=posts_path%>">
+							precedante						
+						</a>
+					</div>
+				<% end %>	
+			</div>
+		</div>
+	</div>

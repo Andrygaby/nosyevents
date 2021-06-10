@@ -1,0 +1,77 @@
+<%= render "devise/shared/error_messages", resource: resource %>
+<div class="main">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">Inscription</h2>
+                <%= form_for(resource, as: resource_name, class: "register-form", url: registration_path(resource_name)) do |f| %>
+                    <div class="form-group">
+                        <label for="user_username">
+                          <i class="zmdi zmdi-account material-icons-name"></i>
+                        </label>
+                          <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "Nom d'utilisateur" %>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_email">
+                          <i class="zmdi zmdi-email"></i>
+                        </label>
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_password">
+                            <i class="zmdi zmdi-lock"></i>
+                        </label>
+
+                            <%= f.password_field :password, autocomplete: "new-password", placeholder: "Mot de passe ( 8 characters min )" %>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_password_confirmation">
+                            <i class="zmdi zmdi-lock-outline"></i>
+                        </label>
+                        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirmer le mot de passe" %>
+                    </div>
+
+
+                    <div class="form-group form-button">
+                        <%= f.submit "s'inscrire", class: "form-submit" %>
+                    </div>
+
+                    <div class="social-sign_up">
+                    <span class="social-label">Ou s'inscrire avec</span>
+                    <ul class="socials">
+                        <li>
+                            <a href="https://colorlib.com/etc/regform/colorlib-regform-7/#">
+                                <i class="display-flex-center zmdi zmdi-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://colorlib.com/etc/regform/colorlib-regform-7/#">
+                                <i class="display-flex-center zmdi zmdi-google"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <% end %>
+            </div>
+
+            <div class="signup-image">
+                <figure>
+                    <img src="images/signup.png" alt="sing up image">
+                </figure>
+                <%= link_to "J'ai déjà un compte", new_session_path(resource_name), class: "signup-image-link" %><br>
+                <%= link_to "j'ai pas reçu le mail d'activation", new_confirmation_path(resource_name), class: "signup-image-link" %><br>
+                <%= link_to "Revenir à la page d'acceil", root_path, class: "signup-image-link" %>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>

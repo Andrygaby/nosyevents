@@ -1,0 +1,49 @@
+<%= render "devise/shared/error_messages", resource: resource %>
+
+<div class="main">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">Nouveau mot de passe</h2>
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                <%= f.hidden_field :reset_password_token %>
+                    <div class="form-group">
+                        <label for="user_password">
+                            <i class="zmdi zmdi-lock"></i>
+                        </label>
+                        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Mot de passe ( 8 characters min )" %>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_password_confirmation">
+                            <i class="zmdi zmdi-lock-outline"></i>
+                        </label>
+                        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirmer le mot de passe" %>
+                    </div>
+
+
+                    <div class="form-group form-button">
+                        <%= f.submit "Enregistré mot de passe", class: "form-submit" %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="signup-image">
+                <figure>
+                    <img src="images/sad-man.png" alt="sad man">
+                </figure>
+                <%= link_to "Créer un compte", new_registration_path(resource_name), class: "signup-image-link" %><br>
+                <%= link_to "j'ai pas reçu le mail d'activation", new_confirmation_path(resource_name), class: "signup-image-link" %><br>
+                <%= link_to "Revenir à la page d'acceil", root_path, class: "signup-image-link" %>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+

@@ -1,0 +1,94 @@
+I, [2020-07-10T23:34:29.986712 #27282]  INFO -- : [ebce10ee-03bf-418f-9ccb-5aa168e1bd03] Started GET "/" for 127.0.0.1 at 2020-07-10 23:34:29 +0300
+I, [2020-07-10T23:34:29.990622 #27282]  INFO -- : [ebce10ee-03bf-418f-9ccb-5aa168e1bd03] Processing by HomeController#index as HTML
+I, [2020-07-10T23:34:30.016771 #27282]  INFO -- : [ebce10ee-03bf-418f-9ccb-5aa168e1bd03]   Rendering home/index.html.erb within layouts/application
+I, [2020-07-10T23:34:30.047517 #27282]  INFO -- : [ebce10ee-03bf-418f-9ccb-5aa168e1bd03]   Rendered home/index.html.erb within layouts/application (Duration: 27.7ms | Allocations: 2214)
+I, [2020-07-10T23:34:30.048506 #27282]  INFO -- : [ebce10ee-03bf-418f-9ccb-5aa168e1bd03] Completed 500 Internal Server Error in 54ms (Allocations: 4049)
+F, [2020-07-10T23:34:30.052156 #27282] FATAL -- : [ebce10ee-03bf-418f-9ccb-5aa168e1bd03]   
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03] ActionView::Template::Error (FATAL:  Peer authentication failed for user "nosyevents"
+):
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03]     81: 
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03]     82:     </header>
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03]     83: 
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03]     84: <% if @posts.any? %>
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03]     85: 
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03]     86:     <section class="s-featured">
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03]     87:         <div class="row">
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03]   
+[ebce10ee-03bf-418f-9ccb-5aa168e1bd03] app/views/home/index.html.erb:84
+I, [2020-07-10T23:34:33.441714 #27282]  INFO -- : [332b5719-ac32-4439-8629-8fbf166a13a7] Started GET "/" for 127.0.0.1 at 2020-07-10 23:34:33 +0300
+I, [2020-07-10T23:34:33.443617 #27282]  INFO -- : [332b5719-ac32-4439-8629-8fbf166a13a7] Processing by HomeController#index as HTML
+I, [2020-07-10T23:34:33.448077 #27282]  INFO -- : [332b5719-ac32-4439-8629-8fbf166a13a7]   Rendering home/index.html.erb within layouts/application
+I, [2020-07-10T23:34:33.459107 #27282]  INFO -- : [332b5719-ac32-4439-8629-8fbf166a13a7]   Rendered home/index.html.erb within layouts/application (Duration: 10.5ms | Allocations: 578)
+I, [2020-07-10T23:34:33.459658 #27282]  INFO -- : [332b5719-ac32-4439-8629-8fbf166a13a7] Completed 500 Internal Server Error in 16ms (Allocations: 1521)
+F, [2020-07-10T23:34:33.462763 #27282] FATAL -- : [332b5719-ac32-4439-8629-8fbf166a13a7]   
+[332b5719-ac32-4439-8629-8fbf166a13a7] ActionView::Template::Error (FATAL:  Peer authentication failed for user "nosyevents"
+):
+[332b5719-ac32-4439-8629-8fbf166a13a7]     81: 
+[332b5719-ac32-4439-8629-8fbf166a13a7]     82:     </header>
+[332b5719-ac32-4439-8629-8fbf166a13a7]     83: 
+[332b5719-ac32-4439-8629-8fbf166a13a7]     84: <% if @posts.any? %>
+[332b5719-ac32-4439-8629-8fbf166a13a7]     85: 
+[332b5719-ac32-4439-8629-8fbf166a13a7]     86:     <section class="s-featured">
+[332b5719-ac32-4439-8629-8fbf166a13a7]     87:         <div class="row">
+[332b5719-ac32-4439-8629-8fbf166a13a7]   
+[332b5719-ac32-4439-8629-8fbf166a13a7] app/views/home/index.html.erb:84
+I, [2020-07-10T23:34:46.655923 #27282]  INFO -- : [f8d5b79e-7de4-4a4c-8436-930a1c229ddd] Started GET "/" for 127.0.0.1 at 2020-07-10 23:34:46 +0300
+I, [2020-07-10T23:34:46.657755 #27282]  INFO -- : [f8d5b79e-7de4-4a4c-8436-930a1c229ddd] Processing by HomeController#index as HTML
+I, [2020-07-10T23:34:46.665003 #27282]  INFO -- : [f8d5b79e-7de4-4a4c-8436-930a1c229ddd]   Rendering home/index.html.erb within layouts/application
+I, [2020-07-10T23:34:46.674465 #27282]  INFO -- : [f8d5b79e-7de4-4a4c-8436-930a1c229ddd]   Rendered home/index.html.erb within layouts/application (Duration: 7.3ms | Allocations: 578)
+I, [2020-07-10T23:34:46.674951 #27282]  INFO -- : [f8d5b79e-7de4-4a4c-8436-930a1c229ddd] Completed 500 Internal Server Error in 17ms (Allocations: 1520)
+F, [2020-07-10T23:34:46.677954 #27282] FATAL -- : [f8d5b79e-7de4-4a4c-8436-930a1c229ddd]   
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd] ActionView::Template::Error (FATAL:  Peer authentication failed for user "nosyevents"
+):
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd]     81: 
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd]     82:     </header>
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd]     83: 
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd]     84: <% if @posts.any? %>
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd]     85: 
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd]     86:     <section class="s-featured">
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd]     87:         <div class="row">
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd]   
+[f8d5b79e-7de4-4a4c-8436-930a1c229ddd] app/views/home/index.html.erb:84
+I, [2020-07-10T23:35:35.690129 #27282]  INFO -- : [76722d67-c51b-4e20-a84f-e073f351bf97] Started GET "/" for 127.0.0.1 at 2020-07-10 23:35:35 +0300
+I, [2020-07-10T23:35:35.691995 #27282]  INFO -- : [76722d67-c51b-4e20-a84f-e073f351bf97] Processing by HomeController#index as HTML
+I, [2020-07-10T23:35:35.694027 #27282]  INFO -- : [76722d67-c51b-4e20-a84f-e073f351bf97]   Rendering home/index.html.erb within layouts/application
+I, [2020-07-10T23:35:35.706442 #27282]  INFO -- : [76722d67-c51b-4e20-a84f-e073f351bf97]   Rendered home/index.html.erb within layouts/application (Duration: 11.9ms | Allocations: 578)
+I, [2020-07-10T23:35:35.707134 #27282]  INFO -- : [76722d67-c51b-4e20-a84f-e073f351bf97] Completed 500 Internal Server Error in 15ms (Allocations: 927)
+F, [2020-07-10T23:35:35.710255 #27282] FATAL -- : [76722d67-c51b-4e20-a84f-e073f351bf97]   
+[76722d67-c51b-4e20-a84f-e073f351bf97] ActionView::Template::Error (FATAL:  Peer authentication failed for user "nosyevents"
+):
+[76722d67-c51b-4e20-a84f-e073f351bf97]     81: 
+[76722d67-c51b-4e20-a84f-e073f351bf97]     82:     </header>
+[76722d67-c51b-4e20-a84f-e073f351bf97]     83: 
+[76722d67-c51b-4e20-a84f-e073f351bf97]     84: <% if @posts.any? %>
+[76722d67-c51b-4e20-a84f-e073f351bf97]     85: 
+[76722d67-c51b-4e20-a84f-e073f351bf97]     86:     <section class="s-featured">
+[76722d67-c51b-4e20-a84f-e073f351bf97]     87:         <div class="row">
+[76722d67-c51b-4e20-a84f-e073f351bf97]   
+[76722d67-c51b-4e20-a84f-e073f351bf97] app/views/home/index.html.erb:84
+I, [2020-07-10T23:35:36.197470 #27282]  INFO -- : [8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] Started GET "/favicon.ico" for 127.0.0.1 at 2020-07-10 23:35:36 +0300
+F, [2020-07-10T23:35:36.199127 #27282] FATAL -- : [8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802]   
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802]   
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:76:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+[8201ff7b-3fc9-45fc-8b6b-5f05f4ef2802] puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'

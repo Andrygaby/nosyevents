@@ -1,0 +1,462 @@
+  [1m[35m (340.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "nosyevents_test"[0m
+  [1m[35m (1033.8ms)[0m  [1m[35mCREATE DATABASE "nosyevents_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "admins" CASCADE[0m
+  [1m[35m (165.3ms)[0m  [1m[35mCREATE TABLE "admins" ("id" bigserial primary key, "username" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (48.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admins_on_email" ON "admins"  ("email")[0m
+  [1m[35m (40.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admins_on_reset_password_token" ON "admins"  ("reset_password_token")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "cities" CASCADE[0m
+  [1m[35m (87.8ms)[0m  [1m[35mCREATE TABLE "cities" ("id" bigserial primary key, "ville" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "genres" CASCADE[0m
+  [1m[35m (118.9ms)[0m  [1m[35mCREATE TABLE "genres" ("id" bigserial primary key, "list" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "genres_posts" CASCADE[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCREATE TABLE "genres_posts" ("genre_id" bigint, "post_id" bigint)[0m
+  [1m[35m (48.5ms)[0m  [1m[35mCREATE  INDEX  "index_genres_posts_on_genre_id" ON "genres_posts"  ("genre_id")[0m
+  [1m[35m (51.2ms)[0m  [1m[35mCREATE  INDEX  "index_genres_posts_on_post_id" ON "genres_posts"  ("post_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (85.7ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "title" character varying, "address" character varying, "date_limite" timestamp, "hour" character varying, "description" text, "price" character varying, "payer" boolean DEFAULT FALSE, "image" character varying, "user_id" bigint, "city_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (40.1ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_city_id" ON "posts"  ("city_id")[0m
+  [1m[35m (39.9ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (106.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "image" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (51.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (62.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (117.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (10.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200701215222)[0m
+  [1m[35m (10.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200701214827),
+(20200701214852),
+(20200701215136),
+(20200701215145),
+(20200701215154);
+
+[0m
+  [1m[35m (105.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-07-10 20:15:47.839652"], ["updated_at", "2020-07-10 20:15:47.839652"]]
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "448ff9d691d2379aaeff98f6bd195c4a1851d4d5"], ["created_at", "2020-07-10 20:15:47.854755"], ["updated_at", "2020-07-10 20:15:47.854755"]]
+  [1m[35m (11.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1714.0ms)[0m  [1m[35mCREATE DATABASE "nosyevents_test-0" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "admins" CASCADE[0m
+  [1m[35m (358.2ms)[0m  [1m[35mCREATE TABLE "admins" ("id" bigserial primary key, "username" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (105.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admins_on_email" ON "admins"  ("email")[0m
+  [1m[35m (105.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admins_on_reset_password_token" ON "admins"  ("reset_password_token")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "cities" CASCADE[0m
+  [1m[35m (187.7ms)[0m  [1m[35mCREATE TABLE "cities" ("id" bigserial primary key, "ville" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "genres" CASCADE[0m
+  [1m[35m (163.6ms)[0m  [1m[35mCREATE TABLE "genres" ("id" bigserial primary key, "list" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "genres_posts" CASCADE[0m
+  [1m[35m (75.9ms)[0m  [1m[35mCREATE TABLE "genres_posts" ("genre_id" bigint, "post_id" bigint)[0m
+  [1m[35m (51.1ms)[0m  [1m[35mCREATE  INDEX  "index_genres_posts_on_genre_id" ON "genres_posts"  ("genre_id")[0m
+  [1m[35m (2953.6ms)[0m  [1m[35mCREATE DATABASE "nosyevents_test-1" ENCODING = 'unicode'[0m
+  [1m[35m (72.8ms)[0m  [1m[35mCREATE  INDEX  "index_genres_posts_on_post_id" ON "genres_posts"  ("post_id")[0m
+  [1m[35m (3.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "admins" CASCADE[0m
+  [1m[35m (85.5ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "title" character varying, "address" character varying, "date_limite" timestamp, "hour" character varying, "description" text, "price" character varying, "payer" boolean DEFAULT FALSE, "image" character varying, "user_id" bigint, "city_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (109.5ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_city_id" ON "posts"  ("city_id")[0m
+  [1m[35m (274.1ms)[0m  [1m[35mCREATE TABLE "admins" ("id" bigserial primary key, "username" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (104.3ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (97.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admins_on_email" ON "admins"  ("email")[0m
+  [1m[35m (174.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "image" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (93.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admins_on_reset_password_token" ON "admins"  ("reset_password_token")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "cities" CASCADE[0m
+  [1m[35m (95.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (174.9ms)[0m  [1m[35mCREATE TABLE "cities" ("id" bigserial primary key, "ville" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "genres" CASCADE[0m
+  [1m[35m (95.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (152.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (177.6ms)[0m  [1m[35mCREATE TABLE "genres" ("id" bigserial primary key, "list" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "genres_posts" CASCADE[0m
+  [1m[35m (5.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "genres_posts" ("genre_id" bigint, "post_id" bigint)[0m
+  [1m[35m (33.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200701215222)[0m
+  [1m[35m (69.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200701214827),
+(20200701214852),
+(20200701215136),
+(20200701215145),
+(20200701215154);
+
+[0m
+  [1m[35m (106.5ms)[0m  [1m[35mCREATE  INDEX  "index_genres_posts_on_genre_id" ON "genres_posts"  ("genre_id")[0m
+  [1m[35m (128.9ms)[0m  [1m[35mCREATE  INDEX  "index_genres_posts_on_post_id" ON "genres_posts"  ("post_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (150.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-07-10 20:15:52.459887"], ["updated_at", "2020-07-10 20:15:52.459887"]]
+  [1m[35m (51.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (121.5ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "title" character varying, "address" character varying, "date_limite" timestamp, "hour" character varying, "description" text, "price" character varying, "payer" boolean DEFAULT FALSE, "image" character varying, "user_id" bigint, "city_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (13.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "448ff9d691d2379aaeff98f6bd195c4a1851d4d5"], ["created_at", "2020-07-10 20:15:52.536053"], ["updated_at", "2020-07-10 20:15:52.536053"]]
+  [1m[35m (64.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (139.1ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_city_id" ON "posts"  ("city_id")[0m
+  [1m[35m (169.9ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (18.8ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:52.870352', '2020-07-10 20:15:52.870352'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:52.870352', '2020-07-10 20:15:52.870352');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:52.959836', '2020-07-10 20:15:52.959836'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:52.959836', '2020-07-10 20:15:52.959836');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:52.976204', '2020-07-10 20:15:52.976204'), (298486374, DEFAULT, '2020-07-10 20:15:52.976204', '2020-07-10 20:15:52.976204');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:52.987466', '2020-07-10 20:15:52.987466'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:52.987466', '2020-07-10 20:15:52.987466');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.002324', '2020-07-10 20:15:53.002324'), (298486374, DEFAULT, '2020-07-10 20:15:53.002324', '2020-07-10 20:15:53.002324')[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (284.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "image" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (84.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (128.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (140.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (31.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200701215222)[0m
+  [1m[35m (10.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200701214827),
+(20200701214852),
+(20200701215136),
+(20200701215145),
+(20200701215154);
+
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (13.1ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.662562', '2020-07-10 20:15:53.662562'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.662562', '2020-07-10 20:15:53.662562');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.662768', '2020-07-10 20:15:53.662768'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.662768', '2020-07-10 20:15:53.662768');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.663095', '2020-07-10 20:15:53.663095'), (298486374, DEFAULT, '2020-07-10 20:15:53.663095', '2020-07-10 20:15:53.663095');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.663318', '2020-07-10 20:15:53.663318'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.663318', '2020-07-10 20:15:53.663318');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.663474', '2020-07-10 20:15:53.663474'), (298486374, DEFAULT, '2020-07-10 20:15:53.663474', '2020-07-10 20:15:53.663474')[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.712752', '2020-07-10 20:15:53.712752'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.712752', '2020-07-10 20:15:53.712752');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.712958', '2020-07-10 20:15:53.712958'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.712958', '2020-07-10 20:15:53.712958');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.713137', '2020-07-10 20:15:53.713137'), (298486374, DEFAULT, '2020-07-10 20:15:53.713137', '2020-07-10 20:15:53.713137');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.713409', '2020-07-10 20:15:53.713409'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.713409', '2020-07-10 20:15:53.713409');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.713544', '2020-07-10 20:15:53.713544'), (298486374, DEFAULT, '2020-07-10 20:15:53.713544', '2020-07-10 20:15:53.713544')[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (164.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.747800', '2020-07-10 20:15:53.747800'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.747800', '2020-07-10 20:15:53.747800');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.748052', '2020-07-10 20:15:53.748052'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.748052', '2020-07-10 20:15:53.748052');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.748277', '2020-07-10 20:15:53.748277'), (298486374, DEFAULT, '2020-07-10 20:15:53.748277', '2020-07-10 20:15:53.748277');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.748409', '2020-07-10 20:15:53.748409'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.748409', '2020-07-10 20:15:53.748409');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.748542', '2020-07-10 20:15:53.748542'), (298486374, DEFAULT, '2020-07-10 20:15:53.748542', '2020-07-10 20:15:53.748542')[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.780079', '2020-07-10 20:15:53.780079'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.780079', '2020-07-10 20:15:53.780079');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.780276', '2020-07-10 20:15:53.780276'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.780276', '2020-07-10 20:15:53.780276');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.780470', '2020-07-10 20:15:53.780470'), (298486374, DEFAULT, '2020-07-10 20:15:53.780470', '2020-07-10 20:15:53.780470');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.780603', '2020-07-10 20:15:53.780603'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.780603', '2020-07-10 20:15:53.780603');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.780737', '2020-07-10 20:15:53.780737'), (298486374, DEFAULT, '2020-07-10 20:15:53.780737', '2020-07-10 20:15:53.780737')[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.812310', '2020-07-10 20:15:53.812310'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.812310', '2020-07-10 20:15:53.812310');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.812539', '2020-07-10 20:15:53.812539'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.812539', '2020-07-10 20:15:53.812539');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.812756', '2020-07-10 20:15:53.812756'), (298486374, DEFAULT, '2020-07-10 20:15:53.812756', '2020-07-10 20:15:53.812756');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.812906', '2020-07-10 20:15:53.812906'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.812906', '2020-07-10 20:15:53.812906');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.813210', '2020-07-10 20:15:53.813210'), (298486374, DEFAULT, '2020-07-10 20:15:53.813210', '2020-07-10 20:15:53.813210')[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-07-10 20:15:53.866083"], ["updated_at", "2020-07-10 20:15:53.866083"]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (9.8ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.857326', '2020-07-10 20:15:53.857326'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.857326', '2020-07-10 20:15:53.857326');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.857615', '2020-07-10 20:15:53.857615'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.857615', '2020-07-10 20:15:53.857615');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.857832', '2020-07-10 20:15:53.857832'), (298486374, DEFAULT, '2020-07-10 20:15:53.857832', '2020-07-10 20:15:53.857832');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.857988', '2020-07-10 20:15:53.857988'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.857988', '2020-07-10 20:15:53.857988');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.858142', '2020-07-10 20:15:53.858142'), (298486374, DEFAULT, '2020-07-10 20:15:53.858142', '2020-07-10 20:15:53.858142')[0m
+  [1m[35m (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Create (3.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "448ff9d691d2379aaeff98f6bd195c4a1851d4d5"], ["created_at", "2020-07-10 20:15:53.894326"], ["updated_at", "2020-07-10 20:15:53.894326"]]
+  [1m[35m (4.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (5.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.0ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.954605', '2020-07-10 20:15:53.954605'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.954605', '2020-07-10 20:15:53.954605');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.954868', '2020-07-10 20:15:53.954868'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.954868', '2020-07-10 20:15:53.954868');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.962459', '2020-07-10 20:15:53.962459'), (298486374, DEFAULT, '2020-07-10 20:15:53.962459', '2020-07-10 20:15:53.962459');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.962650', '2020-07-10 20:15:53.962650'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:53.962650', '2020-07-10 20:15:53.962650');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:53.962789', '2020-07-10 20:15:53.962789'), (298486374, DEFAULT, '2020-07-10 20:15:53.962789', '2020-07-10 20:15:53.962789')[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.6ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:54.109860', '2020-07-10 20:15:54.109860'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:54.109860', '2020-07-10 20:15:54.109860');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:54.130285', '2020-07-10 20:15:54.130285'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:54.130285', '2020-07-10 20:15:54.130285');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:54.143733', '2020-07-10 20:15:54.143733'), (298486374, DEFAULT, '2020-07-10 20:15:54.143733', '2020-07-10 20:15:54.143733');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:54.154791', '2020-07-10 20:15:54.154791'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:15:54.154791', '2020-07-10 20:15:54.154791');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:15:54.167259', '2020-07-10 20:15:54.167259'), (298486374, DEFAULT, '2020-07-10 20:15:54.167259', '2020-07-10 20:15:54.167259')[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (340.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "nosyevents_test"[0m
+  [1m[35m (1089.3ms)[0m  [1m[35mCREATE DATABASE "nosyevents_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "admins" CASCADE[0m
+  [1m[35m (137.7ms)[0m  [1m[35mCREATE TABLE "admins" ("id" bigserial primary key, "username" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (60.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admins_on_email" ON "admins"  ("email")[0m
+  [1m[35m (51.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admins_on_reset_password_token" ON "admins"  ("reset_password_token")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "cities" CASCADE[0m
+  [1m[35m (98.4ms)[0m  [1m[35mCREATE TABLE "cities" ("id" bigserial primary key, "ville" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "genres" CASCADE[0m
+  [1m[35m (120.9ms)[0m  [1m[35mCREATE TABLE "genres" ("id" bigserial primary key, "list" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "genres_posts" CASCADE[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "genres_posts" ("genre_id" bigint, "post_id" bigint)[0m
+  [1m[35m (49.6ms)[0m  [1m[35mCREATE  INDEX  "index_genres_posts_on_genre_id" ON "genres_posts"  ("genre_id")[0m
+  [1m[35m (40.0ms)[0m  [1m[35mCREATE  INDEX  "index_genres_posts_on_post_id" ON "genres_posts"  ("post_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (97.0ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "title" character varying, "address" character varying, "date_limite" timestamp, "hour" character varying, "description" text, "price" character varying, "payer" boolean DEFAULT FALSE, "image" character varying, "user_id" bigint, "city_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (51.2ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_city_id" ON "posts"  ("city_id")[0m
+  [1m[35m (73.8ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (115.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "image" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (51.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (39.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (139.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (6.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200701215222)[0m
+  [1m[35m (10.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200701214827),
+(20200701214852),
+(20200701215136),
+(20200701215145),
+(20200701215154);
+
+[0m
+  [1m[35m (105.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-07-10 20:20:44.359697"], ["updated_at", "2020-07-10 20:20:44.359697"]]
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "448ff9d691d2379aaeff98f6bd195c4a1851d4d5"], ["created_at", "2020-07-10 20:20:44.375353"], ["updated_at", "2020-07-10 20:20:44.375353"]]
+  [1m[35m (10.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1639.5ms)[0m  [1m[35mTRUNCATE TABLE "admins", "cities", "genres", "genres_posts", "posts", "users"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "admins" ENABLE TRIGGER ALL;ALTER TABLE "cities" ENABLE TRIGGER ALL;ALTER TABLE "genres" ENABLE TRIGGER ALL;ALTER TABLE "genres_posts" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1650.5ms)[0m  [1m[35mTRUNCATE TABLE "admins", "cities", "genres", "genres_posts", "posts", "users"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "admins" ENABLE TRIGGER ALL;ALTER TABLE "cities" ENABLE TRIGGER ALL;ALTER TABLE "genres" ENABLE TRIGGER ALL;ALTER TABLE "genres_posts" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.2ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL[0m
+  [1m[35m (4.9ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.453015', '2020-07-10 20:20:46.453015'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.453015', '2020-07-10 20:20:46.453015');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.473206', '2020-07-10 20:20:46.473206'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.473206', '2020-07-10 20:20:46.473206');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.485404', '2020-07-10 20:20:46.485404'), (298486374, DEFAULT, '2020-07-10 20:20:46.485404', '2020-07-10 20:20:46.485404');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.511415', '2020-07-10 20:20:46.511415'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.511415', '2020-07-10 20:20:46.511415');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.527831', '2020-07-10 20:20:46.527831'), (298486374, DEFAULT, '2020-07-10 20:20:46.527831', '2020-07-10 20:20:46.527831')[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.6ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.490831', '2020-07-10 20:20:46.490831'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.490831', '2020-07-10 20:20:46.490831');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.525026', '2020-07-10 20:20:46.525026'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.525026', '2020-07-10 20:20:46.525026');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.537128', '2020-07-10 20:20:46.537128'), (298486374, DEFAULT, '2020-07-10 20:20:46.537128', '2020-07-10 20:20:46.537128');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.546508', '2020-07-10 20:20:46.546508'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.546508', '2020-07-10 20:20:46.546508');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.558502', '2020-07-10 20:20:46.558502'), (298486374, DEFAULT, '2020-07-10 20:20:46.558502', '2020-07-10 20:20:46.558502')[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.0ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.730877', '2020-07-10 20:20:46.730877'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.730877', '2020-07-10 20:20:46.730877');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.731244', '2020-07-10 20:20:46.731244'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.731244', '2020-07-10 20:20:46.731244');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.731496', '2020-07-10 20:20:46.731496'), (298486374, DEFAULT, '2020-07-10 20:20:46.731496', '2020-07-10 20:20:46.731496');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.731688', '2020-07-10 20:20:46.731688'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.731688', '2020-07-10 20:20:46.731688');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.731831', '2020-07-10 20:20:46.731831'), (298486374, DEFAULT, '2020-07-10 20:20:46.731831', '2020-07-10 20:20:46.731831')[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.756611', '2020-07-10 20:20:46.756611'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.756611', '2020-07-10 20:20:46.756611');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.756915', '2020-07-10 20:20:46.756915'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.756915', '2020-07-10 20:20:46.756915');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.757164', '2020-07-10 20:20:46.757164'), (298486374, DEFAULT, '2020-07-10 20:20:46.757164', '2020-07-10 20:20:46.757164');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.757352', '2020-07-10 20:20:46.757352'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.757352', '2020-07-10 20:20:46.757352');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.757505', '2020-07-10 20:20:46.757505'), (298486374, DEFAULT, '2020-07-10 20:20:46.757505', '2020-07-10 20:20:46.757505')[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.1ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL[0m
+  [1m[35m (3.4ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.828861', '2020-07-10 20:20:46.828861'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.828861', '2020-07-10 20:20:46.828861');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.829144', '2020-07-10 20:20:46.829144'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.829144', '2020-07-10 20:20:46.829144');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.829369', '2020-07-10 20:20:46.829369'), (298486374, DEFAULT, '2020-07-10 20:20:46.829369', '2020-07-10 20:20:46.829369');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.829516', '2020-07-10 20:20:46.829516'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.829516', '2020-07-10 20:20:46.829516');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.829662', '2020-07-10 20:20:46.829662'), (298486374, DEFAULT, '2020-07-10 20:20:46.829662', '2020-07-10 20:20:46.829662')[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (2.5ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.832486', '2020-07-10 20:20:46.832486'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.832486', '2020-07-10 20:20:46.832486');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.832691', '2020-07-10 20:20:46.832691'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.832691', '2020-07-10 20:20:46.832691');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.832878', '2020-07-10 20:20:46.832878'), (298486374, DEFAULT, '2020-07-10 20:20:46.832878', '2020-07-10 20:20:46.832878');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.833010', '2020-07-10 20:20:46.833010'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.833010', '2020-07-10 20:20:46.833010');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.833136', '2020-07-10 20:20:46.833136'), (298486374, DEFAULT, '2020-07-10 20:20:46.833136', '2020-07-10 20:20:46.833136')[0m
+  [1m[35m (1.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.874838', '2020-07-10 20:20:46.874838'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.874838', '2020-07-10 20:20:46.874838');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.875737', '2020-07-10 20:20:46.875737'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.875737', '2020-07-10 20:20:46.875737');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.875971', '2020-07-10 20:20:46.875971'), (298486374, DEFAULT, '2020-07-10 20:20:46.875971', '2020-07-10 20:20:46.875971');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.876099', '2020-07-10 20:20:46.876099'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.876099', '2020-07-10 20:20:46.876099');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.876227', '2020-07-10 20:20:46.876227'), (298486374, DEFAULT, '2020-07-10 20:20:46.876227', '2020-07-10 20:20:46.876227')[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.4ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.893898', '2020-07-10 20:20:46.893898'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.893898', '2020-07-10 20:20:46.893898');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.894242', '2020-07-10 20:20:46.894242'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.894242', '2020-07-10 20:20:46.894242');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.894495', '2020-07-10 20:20:46.894495'), (298486374, DEFAULT, '2020-07-10 20:20:46.894495', '2020-07-10 20:20:46.894495');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.894660', '2020-07-10 20:20:46.894660'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.894660', '2020-07-10 20:20:46.894660');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.894819', '2020-07-10 20:20:46.894819'), (298486374, DEFAULT, '2020-07-10 20:20:46.894819', '2020-07-10 20:20:46.894819')[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "admins" DISABLE TRIGGER ALL;ALTER TABLE "cities" DISABLE TRIGGER ALL;ALTER TABLE "genres" DISABLE TRIGGER ALL;ALTER TABLE "genres_posts" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.8ms)[0m  [1m[31mDELETE FROM "admins";
+DELETE FROM "posts";
+DELETE FROM "cities";
+DELETE FROM "users";
+DELETE FROM "genres";
+INSERT INTO "admins" ("id", "username", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.921138', '2020-07-10 20:20:46.921138'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.921138', '2020-07-10 20:20:46.921138');
+INSERT INTO "posts" ("id", "title", "address", "date_limite", "hour", "description", "price", "payer", "image", "user_id", "city_id", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.921450', '2020-07-10 20:20:46.921450'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.921450', '2020-07-10 20:20:46.921450');
+INSERT INTO "cities" ("id", "ville", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.921671', '2020-07-10 20:20:46.921671'), (298486374, DEFAULT, '2020-07-10 20:20:46.921671', '2020-07-10 20:20:46.921671');
+INSERT INTO "users" ("id", "username", "image", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "confirmation_token", "confirmed_at", "confirmation_sent_at", "unconfirmed_email", "created_at", "updated_at") VALUES (980190962, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.921808', '2020-07-10 20:20:46.921808'), (298486374, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '2020-07-10 20:20:46.921808', '2020-07-10 20:20:46.921808');
+INSERT INTO "genres" ("id", "list", "created_at", "updated_at") VALUES (980190962, DEFAULT, '2020-07-10 20:20:46.921938', '2020-07-10 20:20:46.921938'), (298486374, DEFAULT, '2020-07-10 20:20:46.921938', '2020-07-10 20:20:46.921938')[0m
+  [1m[35m (3.2ms)[0m  [1m[31mROLLBACK[0m

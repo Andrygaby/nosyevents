@@ -1,0 +1,100 @@
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+
+    <!-- header
+    ================================================== -->
+    <header class="s-header header">
+
+        <div class="header__logo">
+            <a class="logo" href="/">
+                <img src="home/images/LOGO.png" alt="Homepage">
+            </a>
+        </div> <!-- end header__logo -->
+
+        <a class="header__search-trigger" href="#"></a>
+
+        <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
+        <nav class="header__nav-wrap">
+
+            <h2 class="header__nav-heading h6">Menu</h2>
+
+            <ul class="header__nav">
+                <li class="has-children">
+                    <a href="#0" title="">Province</a>
+                    <ul class="sub-menu">
+                        <li><a href="category.html">Antananarivo</a></li>
+                        <li><a href="category.html">Antsiranana</a></li>
+                        <li><a href="category.html">Mahajanga</a></li>
+                        <li><a href="category.html">Toamasina</a></li>
+                        <li><a href="category.html">Fianarantsoa</a></li>
+                        <li><a href="category.html">Toliara</a></li>
+                    </ul>
+                <li class="has-children">
+                    <a href="#0" title="">Tout les evenemets</a>
+                    <ul class="sub-menu">
+                        <li><a href="category.html">Sport</a></li>
+                        <li><a href="category.html">Cabaret</a></li>
+                        <li><a href="category.html">Spectacle</a></li>
+                        <li><a href="category.html">Soirée</a></li>
+                        <li><a href="category.html">Festival</a></li>
+                        <li><a href="category.html">Scolaire</a></li>
+                        <li><a href="category.html">Lifestyle</a></li>
+                        <li><a href="category.html">Foire</a></li>
+                        <li><a href="category.html">Salon</a></li>
+                        <li><a href="category.html">Teatre</a></li>
+                        <li><a href="category.html">Evangelique</a></li>
+                        <li><a href="category.html">Balle</a></li>
+                    </ul>
+                </li>
+
+                <% if(user_signed_in?) %>
+                <li class="has-children">
+                    <%if current_user.image?%>
+                        <a href="#0" title=""><img src="<%= current_user.image %>" style="border-radius: 100%; width: 25px; height: 25px; margin-bottom: -10px;"></a>
+                    <% else %>
+                        <a href="#0" title=""><img src="users/images/user-icon.png" style="border-radius: 100%; width: 25px; height: 25px; margin-bottom: -10px;"></a>
+                    <% end %>
+                    <ul class="sub-menu">
+                        <li><a href="/users/<%= current_user.username%>"><%= current_user.username.capitalize %></a> </li>
+                        <li><a href="<%= posts_path%>">Mes publications</a></li>
+                    <li><%= link_to "se deconecter", destroy_user_session_path, method: :delete, style: "color: #DCD850; font-size: 15px" %></li>
+                    </ul>
+                </li>
+                <% else %>
+                    <li><%= link_to "se connecter", new_user_session_path, style: "color: #15c4d4; font-size: 18px" %></li>
+                    <li><%= link_to "s'inscrire", new_user_registration_path(@user), style: "color: #68de4d; font-size: 16px" %></li>
+                <% end %>
+
+            </ul>
+
+            <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+
+        </nav>
+
+    </header>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+<h1>Page de tout vo publication</h1>
+
+<%= link_to "Poster un nouvelle evenement", new_post_path %>
